@@ -34,27 +34,24 @@ CSV.foreach(options[:in]) do |row|
     # ONLY SUPPORTS AND/OR OPERATORS
     # TODO: SUPPORT NOT OPERATOR
     #           Giuseppe
-    if when_to_pack.match(/or/) or when_to_pack.match(/and/)
-      if when_to_pack.match(/and/)
-         conditions = when_to_pack.split('and').map {|condition| condition.lstrip.rstrip }
-         # these ifs are really bad but I don't want to touch them because
-         # I'm too scared
-         if conditions.all? {|condition| weather_conditions_to_match.include? condition }
-           unless ii.include? item
-             out.puts item
-             ii << item
-           end
-         end
-      elsif when_to_pack.match(/or/) or !when_to_pack.match(/and/)
-         if when_to_pack.split('or').map {|condition|condition.strip }.any? {|condition| weather_conditions_to_match.include? condition }
-           if !ii.include? item
-             ii << item
-             ii << item
-             out.puts item
-           end
-         end
-      else
-        raise RegexpError.new("An error has been occured!")
+    
+    if when_to_pack.match(/and/)
+      conditions = when_to_pack.split('and').map {|condition| condition.lstrip.rstrip }
+      # these ifs are really bad but I don't want to touch them because
+      # I'm too scared
+      if conditions.all? {|condition| weather_conditions_to_match.include? condition }
+        unless ii.include? item
+          out.puts item
+          ii << item
+        end
+      end
+    elsif when_to_pack.match(/or/) or !when_to_pack.match(/and/)
+      if when_to_pack.split('or').map {|condition|condition.strip }.any? {|condition| weather_conditions_to_match.include? condition }
+        if !ii.include? item
+          ii << item
+          ii << item
+          out.puts item
+        end
       end
     elsif when_to_pack.match(/^not/)
       when_to_pack = when_to_pack.strip.reverse.chop.chop.chop.reverse.strip
@@ -64,6 +61,8 @@ CSV.foreach(options[:in]) do |row|
           ii << item
         end
       end
+    else
+      raise RegexpError.new("An error has been occured!")
     end
   end
 end
