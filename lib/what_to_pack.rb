@@ -18,16 +18,13 @@ CSV.foreach(options[:in]) do |row|
 
     if when_to_pack.match(/always/)
       # add the item to the list ONLY if it has not been added yet
-      flag = false
       for i in ii
-        if i == item
-          flag = true
-        end
+        return i == item
       end
-      if !flag      # do this if flag is false
-        out.puts item
-        ii << item
-      end
+      # do this if flag is false
+      out.puts item
+      ii << item
+      
     elsif weather_conditions_to_match.include? when_to_pack
       if !ii.include? item
         out.puts item
