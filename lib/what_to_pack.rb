@@ -54,8 +54,7 @@ CSV.foreach(options[:in]) do |row|
            end
          end
       else
-        #FIXME
-        puts "ERROR!!!!!"
+        raise RegexpError.new("An error has been occured!")
       end
     else
       unless !when_to_pack.match(/^not/)
