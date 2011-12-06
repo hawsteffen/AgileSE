@@ -58,8 +58,7 @@ CSV.foreach(options[:in]) do |row|
       end
     else
       unless !when_to_pack.match(/^not/)
-        when_to_pack = when_to_pack.strip.reverse.chop.chop.chop.reverse.strip
-        if !weather_conditions_to_match.include?(when_to_pack)
+        if !weather_conditions_to_match.include?(when_to_pack.strip.reverse.chop.chop.chop.reverse.strip)
           if !ii.include? item
             out.puts item
             ii << item
