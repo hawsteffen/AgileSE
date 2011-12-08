@@ -20,10 +20,7 @@ CSV.foreach(options[:in]) do |row|
     if when_to_pack.match(/always/)
       checkItems(out,item,items)            
     elsif weather_conditions_to_match.include? when_to_pack
-      if !items.include? item
-        out.puts item
-        items << item
-      end
+      checkNotIncludeItems(out,item,items)
     end
     # ONLY SUPPORTS AND/OR OPERATORS
     # TODO: SUPPORT NOT OPERATOR
@@ -31,36 +28,20 @@ CSV.foreach(options[:in]) do |row|
     
     if when_to_pack.match(/and/)
       conditions = when_to_pack.split('and').map {|condition| condition.lstrip.rstrip }
-      # these ifs are really bad but I don't want to touch them because
-      # I'm too scared
-      if conditions.all? {|condition| weather_conditions_to_match.include? condition }
-        unless items.include? item
-          out.puts item
-          items << item
-        end
-      end
+      checkConditions(conditions,weather_conditions_to_match,items,item,out)
     elsif when_to_pack.match(/or/) or !when_to_pack.match(/and/)
       if when_to_pack.split('or').map {|condition|condition.strip }.any? {|condition| weather_conditions_to_match.include? condition }
-        if !items.include? item
-          items << item
-          items << item
-          out.puts item
-        end
+        checkNotIncludeItems(out,item,items)
       end
     elsif when_to_pack.match(/^not/)
       when_to_pack = when_to_pack.strip.reverse.chop.chop.chop.reverse.strip
       if !weather_conditions_to_match.include?(when_to_pack)
-        if !items.include? item
-          out.puts item
-          items << item
-        end
+        checkNotIncludeItems(out,item,items)
       end
     else
       raise RegexpError.new("An error has been occured!")
     end
   end
-  
-
   
 end
 

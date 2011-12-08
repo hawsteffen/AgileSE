@@ -7,3 +7,19 @@ def checkItems(out,item,items)
    out.puts item
    items << item  
 end
+
+def checkNotIncludeItems(out,item,items)
+    if !items.include? item
+      out.puts item
+      items << item
+    end
+end
+
+def checkConditions(conditions,weather_conditions_to_match,items,item,out)
+   if conditions.all? {|condition| weather_conditions_to_match.include? condition }
+    unless items.include? item
+      out.puts item
+      items << item
+     end
+   end
+end
