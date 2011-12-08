@@ -3,6 +3,7 @@ require 'optparse'
 require 'csv'
 
 require File.expand_path(File.dirname(__FILE__)) + '/option_parsing'
+require File.expand_path(File.dirname(__FILE__)) + '/methods'
 
 options = parse_options
 
@@ -17,14 +18,7 @@ CSV.foreach(options[:in]) do |row|
     weather_conditions_to_match = ['always'] | options[:weather]
 
     if when_to_pack.match(/always/)
-      # add the item to the list ONLY if it has not been added yet
-      for i in items
-        return i == item
-      end
-      # do this if flag is false
-      out.puts item
-      items << item
-      
+      checkItems(out,item,items)            
     elsif weather_conditions_to_match.include? when_to_pack
       if !items.include? item
         out.puts item
@@ -65,4 +59,11 @@ CSV.foreach(options[:in]) do |row|
       raise RegexpError.new("An error has been occured!")
     end
   end
+  
+
+  
 end
+
+
+
+
