@@ -1,8 +1,0 @@
-Verwendete Patterns: (1/5)
-
-Replace Assignment with Initialization
-
-
-Bearbeitete CodeStellen: (1/15)
-
-- init nil entfernt
