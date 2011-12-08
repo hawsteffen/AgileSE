@@ -4,22 +4,24 @@ def checkItems(out,item,items)
      return i == item
    end
    # do this if flag is false
-   out.puts item
-   items << item  
+   printAndAddItem(out,item,items)  
 end
 
 def checkNotIncludeItems(out,item,items)
     if !items.include? item
-      out.puts item
-      items << item
+        printAndAddItem(out,item,items)
     end
 end
 
 def checkConditions(conditions,weather_conditions_to_match,items,item,out)
    if conditions.all? {|condition| weather_conditions_to_match.include? condition }
-    unless items.include? item
-      out.puts item
-      items << item
-     end
+      unless items.include? item
+        printAndAddItem(out,item,items)
+      end
    end
+end
+
+def printAndAddItem(out,item,items)
+  out.puts item
+  items << item
 end
