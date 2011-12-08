@@ -1,27 +1,27 @@
-def checkItems(out,item,items)
+def checkItems(itemWrap)
    # add the item to the list ONLY if it has not been added yet
-   for i in items
-     return i == item
+   for i in itemWrap.items
+     return i == itemWrap.item
    end
    # do this if flag is false
-   printAndAddItem(out,item,items)  
+   printAndAddItem(itemWrap)  
 end
 
-def checkNotIncludeItems(out,item,items)
-    if !items.include? item
-        printAndAddItem(out,item,items)
+def checkNotIncludeItems(itemWrap)
+    if !itemWrap.items.include? itemWrap.item
+        printAndAddItem(itemWrap)
     end
 end
 
-def checkConditions(conditions,weather_conditions_to_match,items,item,out)
+def checkConditions(conditions,weather_conditions_to_match,itemWrap)
    if conditions.all? {|condition| weather_conditions_to_match.include? condition }
-      unless items.include? item
-        printAndAddItem(out,item,items)
+      unless itemWrap.items.include? itemWrap.item
+        printAndAddItem(itemWrap)
       end
    end
 end
 
-def printAndAddItem(out,item,items)
-  out.puts item
-  items << item
+def printAndAddItem(itemWrap)
+  itemWrap.out.puts itemWrap.item
+  itemWrap.items << itemWrap.item
 end
