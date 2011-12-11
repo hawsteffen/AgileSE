@@ -1,0 +1,39 @@
+@@ -56,13 +56,12 @@
+
+       else
+
+         raise RegexpError.new("An error has been occured!")
+
+       end
+
+-    else
+
+-      unless !when_to_pack.match(/^not/)
+
+-        if !weather_conditions_to_match.include?(when_to_pack.strip.reverse.chop.chop.chop.reverse.strip)
+
+-          if !ii.include? item
+
+-            out.puts item
+
+-            ii << item
+
+-          end
+
++    elsif when_to_pack.match(/^not/)
+
++      when_to_pack = when_to_pack.strip.reverse.chop.chop.chop.reverse.strip
+
++      if !weather_conditions_to_match.include?(when_to_pack)
+
++        if !ii.include? item
+
++          out.puts item
+
++          ii << item
+
+         end
+
+       end
+
+     end

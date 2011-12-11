@@ -1,0 +1,41 @@
+@@ -36,17 +36,17 @@
+
+     #           Giuseppe
+
+     if when_to_pack.match(/or/) or when_to_pack.match(/and/)
+
+       if when_to_pack.match(/and/)
+
+-         conditions = when_to_pack.split('and').map {|c| c.lstrip.rstrip }
+
++         conditions = when_to_pack.split('and').map {|condition| condition.lstrip.rstrip }
+
+          # these ifs are really bad but I don't want to touch them because
+
+          # I'm too scared
+
+-         if conditions.all? {|c| weather_conditions_to_match.include? c }
+
++         if conditions.all? {|condition| weather_conditions_to_match.include? condition }
+
+            unless ii.include? item
+
+              out.puts item
+
+              ii << item
+
+            end
+
+          end
+
+       elsif when_to_pack.match(/or/) or !when_to_pack.match(/and/)
+
+-         if when_to_pack.split('or').map {|c| c.strip }.any? {|c| weather_conditions_to_match.include? c }
+
++         if when_to_pack.split('or').map {|condition|condition.strip }.any? {|condition| weather_conditions_to_match.include? condition }
+
+            if !ii.include? item
+
+              ii << item
+
+              ii << item
