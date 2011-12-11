@@ -1,0 +1,47 @@
+@@ -1,12 +1,21 @@
+
+ class ItemWrapper
+
+-  attr_accessor :out, :item, :items
+
+-  attr_reader :out, :item, :items
+
+-
+
+   def initialize(out,item,items)
+
+     @out = out
+
+     @item = item
+
+     @items = items
+
+   end
+
+   
+
++  def getOut
+
++    return @out
+
++  end
+
++  
+ 	 
++  def getItem
+
++    return @item
+
++  end
+
++  
+
++  def getItems
+
++    return @items
+
++  end
+
++  
+
+ end

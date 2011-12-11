@@ -1,0 +1,15 @@
+@@ -15,8 +15,7 @@
+
+ CSV.foreach(options[:in]) do |row|
+
+   if row.size > 0
+
+-    item = row[0]
+
+-    itemWrap = ItemWrapper.new(out,item,items)
+
++    itemWrap = ItemWrapper.new(out,row[0],items)
+
+     when_to_pack = row[1].strip.downcase
+
+     weather_conditions_to_match = ['always'] | options[:weather]
